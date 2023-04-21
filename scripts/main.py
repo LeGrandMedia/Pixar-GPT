@@ -1,3 +1,4 @@
+import sys
 import json
 import random
 import commands as cmd
@@ -19,6 +20,7 @@ import logging
 from prompt import get_prompt
 
 cfg = Config()
+
 
 
 def check_openai_api_key():

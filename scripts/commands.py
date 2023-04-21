@@ -1,3 +1,11 @@
+import os
+import sys
+import subprocess
+import requests
+'''import DaVinciResolveScript as drs'''
+'''import unreal'''
+'''import bpy'''
+import urllib.request
 import browse
 import json
 from memory import get_memory
@@ -14,6 +22,7 @@ from duckduckgo_search import ddg
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
+
 cfg = Config()
 
 
@@ -23,6 +32,7 @@ def is_valid_int(value):
         return True
     except ValueError:
         return False
+
 
 
 def get_command(response):
@@ -307,3 +317,44 @@ def delete_agent(key):
     if not result:
         return f"Agent {key} does not exist."
     return f"Agent {key} deleted."
+
+'''#blender mod#
+def execute_blender_script(script):
+    """Execute a Blender script in Blender 3.5."""
+    exec(script, bpy.context.copy())
+
+#unreal engine mod#
+def execute_unreal_script(script):
+    """Execute an Unreal Engine 5.1 script."""
+    exec(script)   
+
+#davinci resolve mod#
+sys.path.append("C:/Program Files/Blackmagic Design/DaVinci Resolve/Fusion/Scripts/Modules")
+
+def execute_davinci_script(script):
+    """Execute a DaVinci Resolve script."""
+    exec(script)
+
+
+#download shit off the internet mod#
+
+
+def download_file(url, save_directory, filename=None):
+    """Download a file from a given URL and save it to the specified directory.
+    Return the saved file path."""
+    if not filename:
+        filename = os.path.basename(url)
+    save_path = os.path.join(save_directory, filename)
+    
+    response = requests.get(url)
+    with open(save_path, "wb") as file:
+        file.write(response.content)
+    
+    return save_path'''
+
+
+
+
+
+
+    

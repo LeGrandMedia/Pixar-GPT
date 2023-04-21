@@ -1,0 +1,10 @@
+###below are plans of Pixar-GPT that ended in the Do_Nothing command######
+
+1:  Review each website's system requirements to identify the most suitable tools
+-  Verify the safety one of the chosen tool
+-  Download and install the chosen tool that meets both the user's specifications and the system requirements.
+2: Use the information on Arcane design elements to draw inspirations for the user's animation.\n- Utilize the tools
+downloaded earlier to create a storyboard and color scheme that reflects the user's story's feel and flow while matching
+their required specifications.\n- Review the storyboard with the user to ensure that it aligns with their preferences
+3: Use the data from the list of tools to research the available resources.\n- Evaluate each tool to determine which
+one will be most suitable for the task.\n- Download and install the tools that best meet my needs.
