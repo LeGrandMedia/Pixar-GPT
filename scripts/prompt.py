@@ -13,9 +13,11 @@ def get_prompt():
     prompt_generator = PromptGenerator()
 
     # Add constraints to the PromptGenerator object
+    prompt_generator.add_constraint("You're on a windows 10 operating system. Don't run linux commands")
     prompt_generator.add_constraint("~4000 word limit for short term memory. Your short term memory is short, so immediately save important information to files.")
     prompt_generator.add_constraint("If you are unsure how you previously did something or want to recall past events, thinking about similar events will help you remember.")
     prompt_generator.add_constraint("No user assistance")
+    prompt_generator.add_constraint("Do not assign tasks to GPT 3.5 powered agents that require access to the internet or to local files.")
     prompt_generator.add_constraint('Exclusively use the commands listed in double quotes e.g. "command name"')
 
     # Define the command list
@@ -38,6 +40,9 @@ def get_prompt():
         ("Execute Shell Command, non-interactive commands only", "execute_shell", { "command_line": "<command_line>"}),
         ("Task Complete (Shutdown)", "task_complete", {"reason": "<reason>"}),
         ("Generate Image", "generate_image", {"prompt": "<prompt>"}),
+        ("Open Blender", "open_blender", {}),
+        ("Write Blender Script", "write_blender_script", {"script": "<blender_script>"}),
+        ("Close Blender", "close_blender", {}),
         ("Do Nothing", "do_nothing", {}),
     ]
 
@@ -47,11 +52,15 @@ def get_prompt():
 
     # Add resources to the PromptGenerator object
     prompt_generator.add_resource("Internet access for searches and information gathering.")
+    prompt_generator.add_resource("Operate with blender's API and bpy module directly to create 3d meshes, models, and animations.")
     prompt_generator.add_resource("Long Term memory management.")
-    prompt_generator.add_resource("GPT-3.5 powered Agents for delegation of simple tasks.")
+    prompt_generator.add_resource("Constantly summarize progress as a text file in Memory Bank for future iterations")
+    prompt_generator.add_resource("Constanly search Memory Bank for resources from past iterations")
+    prompt_generator.add_resource("GPT-3.5 powered Agents for verbal analysis.")
     prompt_generator.add_resource("File output.")
 
     # Add performance evaluations to the PromptGenerator object
+    prompt_generator.add_performance_evaluation("Try to avoid the command do_nothing. Understand that using said command means nothing in your plans actually happened.")
     prompt_generator.add_performance_evaluation("Continuously review and analyze your actions to ensure you are performing to the best of your abilities.")
     prompt_generator.add_performance_evaluation("Constructively self-criticize your big-picture behavior constantly.")
     prompt_generator.add_performance_evaluation("Reflect on past decisions and strategies to refine your approach.")

@@ -2,9 +2,6 @@ import os
 import sys
 import subprocess
 import requests
-'''import DaVinciResolveScript as drs'''
-'''import unreal'''
-'''import bpy'''
 import urllib.request
 import browse
 import json
@@ -21,6 +18,14 @@ from image_gen import generate_image
 from duckduckgo_search import ddg
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+from pixel.aitools import open_blender, write_blender_script, close_blender
+
+
+# Replace with the actual path to the 'site-packages' directory within the Blender Python environment
+path_to_blender_site_packages = "C:\\Users\smile\\Auto-GPT\\auto_gpt_workspace\\blender-2.79b-linux-glibc219-x86_64\\2.79\python\\lib\python3.5\\site-packages"
+sys.path.append(path_to_blender_site_packages)
+
+import bpy
 
 
 cfg = Config()
@@ -103,6 +108,7 @@ def execute_command(command_name, arguments):
             return search_files(arguments["directory"])
         elif command_name == "browse_website":
             return browse_website(arguments["url"], arguments["question"])
+
         # TODO: Change these to take in a file rather than pasted code, if
         # non-file is given, return instructions "Input should be a python
         # filepath, write your code to file and try again"
@@ -121,6 +127,12 @@ def execute_command(command_name, arguments):
                 return "You are not allowed to run local shell commands. To execute shell commands, EXECUTE_LOCAL_COMMANDS must be set to 'True' in your config. Do not attempt to bypass the restriction."
         elif command_name == "generate_image":
             return generate_image(arguments["prompt"])
+        elif command_name == "open_blender":
+            return open_blender()
+        elif command_name == "write_blender_script":
+            return write_blender_script(arguments["script"])
+        elif command_name == "close_blender":
+            return close_blender()
         elif command_name == "do_nothing":
             return "No action performed."
         elif command_name == "task_complete":
@@ -130,7 +142,7 @@ def execute_command(command_name, arguments):
     # All errors, return "Error: + error message"
     except Exception as e:
         return "Error: " + str(e)
-
+           
 
 def get_datetime():
     """Return the current date and time"""
@@ -318,43 +330,3 @@ def delete_agent(key):
         return f"Agent {key} does not exist."
     return f"Agent {key} deleted."
 
-'''#blender mod#
-def execute_blender_script(script):
-    """Execute a Blender script in Blender 3.5."""
-    exec(script, bpy.context.copy())
-
-#unreal engine mod#
-def execute_unreal_script(script):
-    """Execute an Unreal Engine 5.1 script."""
-    exec(script)   
-
-#davinci resolve mod#
-sys.path.append("C:/Program Files/Blackmagic Design/DaVinci Resolve/Fusion/Scripts/Modules")
-
-def execute_davinci_script(script):
-    """Execute a DaVinci Resolve script."""
-    exec(script)
-
-
-#download shit off the internet mod#
-
-
-def download_file(url, save_directory, filename=None):
-    """Download a file from a given URL and save it to the specified directory.
-    Return the saved file path."""
-    if not filename:
-        filename = os.path.basename(url)
-    save_path = os.path.join(save_directory, filename)
-    
-    response = requests.get(url)
-    with open(save_path, "wb") as file:
-        file.write(response.content)
-    
-    return save_path'''
-
-
-
-
-
-
-    

@@ -9,14 +9,15 @@ WORKSPACE_FOLDER = "auto_gpt_workspace"
 def execute_python_file(file):
     """Execute a Python file in a Docker container and return the output"""
 
-    print (f"Executing file '{file}' in workspace '{WORKSPACE_FOLDER}'")
+    print(f"Executing file '{file}' in workspace '{WORKSPACE_FOLDER}'")
 
     if not file.endswith(".py"):
         return "Error: Invalid file type. Only .py files are allowed."
 
     file_path = os.path.join(WORKSPACE_FOLDER, file)
+    abs_file_path = os.path.abspath(file_path)  # Get the absolute path of the file
 
-    if not os.path.isfile(file_path):
+    if not os.path.isfile(abs_file_path):
         return f"Error: File '{file}' does not exist."
 
     try:
@@ -39,9 +40,6 @@ def execute_python_file(file):
                 elif status:
                     print(status)
 
-        # You can replace 'python:3.8' with the desired Python image/version
-        # You can find available Python images on Docker Hub:
-        # https://hub.docker.com/_/python
         container = client.containers.run(
             image_name,
             f'python {file}',
@@ -58,9 +56,6 @@ def execute_python_file(file):
         output = container.wait()
         logs = container.logs().decode('utf-8')
         container.remove()
-
-        # print(f"Execution complete. Output: {output}")
-        # print(f"Logs: {logs}")
 
         return logs
 

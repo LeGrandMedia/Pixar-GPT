@@ -45,6 +45,7 @@ def write_to_file(filename, text):
         return "Error: " + str(e)
 
 
+
 def append_to_file(filename, text):
     """Append text to a file"""
     try:

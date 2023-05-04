@@ -19,6 +19,12 @@ from logger import logger
 import logging
 from prompt import get_prompt
 
+# Replace with the actual path to the 'site-packages' directory within the Blender Python environment
+path_to_blender_site_packages = "C:\\Users\smile\\Auto-GPT\\auto_gpt_workspace\\blender-2.79b-linux-glibc219-x86_64\\2.79\python\\lib\python3.5\\site-packages"
+sys.path.append(path_to_blender_site_packages)
+
+import bpy
+
 cfg = Config()
 
 
